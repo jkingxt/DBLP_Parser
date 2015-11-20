@@ -42,9 +42,11 @@ public class Parser extends DefaultHandler {
 				Long authorId = authorsId.get(author);
 				if (authorId == null) {
 					authorId = GraphDB.createAuthor(author);
+					authorsId.put(author, authorId);
 				}
 				GraphDB.createRelationship(authorId, titleId);
 			}
+			authors.clear();
 		}
 		if (qName.equals("author")) {
 			bauthor = false;
