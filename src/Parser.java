@@ -13,9 +13,11 @@ public class Parser extends DefaultHandler {
 	boolean bauthor = false;
 	boolean btitle = false;
 	boolean byear = false;
+	boolean yearExisted = false;
 	List<String> authors = new LinkedList<String>();
 	Map<String, Long> authorsId = new HashMap<String, Long>();
 	String title = null;
+	int year = 0;
 	
 	@Override
 	public void startElement(String uri, String localName,String qName, Attributes attributes) throws SAXException {
@@ -46,7 +48,14 @@ public class Parser extends DefaultHandler {
 				}
 				GraphDB.createRelationship(authorId, titleId);
 			}
+			if (yearExisted) {
+				GraphDB.createProperty("year", titleId, year);
+				yearExisted = false;
+			}
+			
 			authors.clear();
+			title = null;
+			year = 0;
 		}
 		if (qName.equals("author")) {
 			bauthor = false;
@@ -74,6 +83,8 @@ public class Parser extends DefaultHandler {
 		if (byear) {
 			//System.out.println("year: " + new String(ch, start, length));
 			//byear = false;
+			year = Integer.parseInt(new String(ch, start, length));
+			yearExisted = true;
 		}
 	}
 }

@@ -65,4 +65,14 @@ public class GraphDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void createProperty(String property, long paperId, Object value) {
+		try (Transaction tx = graphDb.beginTx()) {
+			graphDb.getNodeById(paperId).setProperty(property, value);
+			tx.success();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
