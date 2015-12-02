@@ -50,7 +50,7 @@ public class Test {
 		SAXParserFactory saxParserFac = SAXParserFactory.newInstance();
         try {
 			SAXParser parser = saxParserFac.newSAXParser();
-			File file = new File("C:/Xiatao/3rd Semester/Data Intensive Workflow/Homework/Homework3/test.xml");
+			File file = new File("test.xml");
 			InputStream inputStream= new FileInputStream(file);
 			Reader reader = new InputStreamReader(inputStream,"UTF-8");
 			    	      

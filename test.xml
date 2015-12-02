@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE note SYSTEM "dblp.dtd"> 
+<dblp>
+<incollection>
+<author>Andr&eacute; Berton</author>
+<author>Alfred Kaltenmeier</author>
+<author>Udo Haiber</author>
+<author>Olaf Schreiner</author>
+<title>Speech Recognition.</title>
+<pages>85-107</pages>
+<year>2006</year>
+</incollection>
+<incollection mdate="2013-09-10" key="series/cogtech/BertonBM06">
+<author>Andr&eacute; Berton</author>
+<author>Dirk B&uuml;hler</author>
+<author>Wolfgang Minker</author>
+<title>SmartKom-Mobile Car: User Interaction with Mobile Services in a Car Environment.</title>
+<pages>523-537</pages>
+<year>2006</year>
+<booktitle>SmartKom</booktitle>
+<ee>http://dx.doi.org/10.1007/3-540-36678-4_33</ee>
+<crossref>series/cogtech/54023732</crossref>
+<url>db/series/cogtech/54023732.html#BertonBM06</url>
+</incollection>
+</dblp>
