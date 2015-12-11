@@ -44,13 +44,14 @@ public class Test {
 //		
 //		graphDb.shutdown();
 		
+		System.setProperty("jdk.xml.entityExpansionLimit", "0");
 
 		GraphDB.open();
 		
 		SAXParserFactory saxParserFac = SAXParserFactory.newInstance();
         try {
 			SAXParser parser = saxParserFac.newSAXParser();
-			File file = new File("test.xml");
+			File file = new File("C:\\Xiatao\\3rd Semester\\Data Intensive Workflow\\Homework\\Homework3\\dblp_subset.xml");
 			InputStream inputStream= new FileInputStream(file);
 			Reader reader = new InputStreamReader(inputStream,"UTF-8");
 			    	      
@@ -69,6 +70,8 @@ public class Test {
 		}
 		
 		GraphDB.close();
+		
+		System.clearProperty("jdk.xml.entityExpansionLimit");
 	}
 
 }

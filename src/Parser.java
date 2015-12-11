@@ -40,59 +40,81 @@ public class Parser extends DefaultHandler {
 	
 	@Override
 	public void startElement(String uri, String localName,String qName, Attributes attributes) throws SAXException {
-		if (qName.equals("article")) {
+		switch (qName) {
+		case "article": {
 			barticle = true;
+			break;
 		}
-		if (qName.equals("inproceedings")) {
+		case "inproceedings": {
 			binproceedings = true;
+			break;
 		}
-		if (qName.equals("proceedings")) {
+		case "proceedings": {
 			bproceedings = true;
+			break;
 		}
-		if (qName.equals("book")) {
+		case "book": {
 			bbook = true;
+			break;
 		}
-		if (qName.equals("incollection")) {
+		case "incollection": {
 			bincollection = true;
+			break;
 		}
-		if (qName.equals("incollection")) {
-			bincollection = true;
-		}
-		if (qName.equals("phdthesis")) {
+		case "phdthesis": {
 			bphdthesis = true;
+			break;
 		}
-		if (qName.equals("phdthesis")) {
-			bphdthesis = true;
-		}
-		if (qName.equals("mastersthesis")) {
+		case "mastersthesis": {
 			bmastersthesis = true;
+			break;
 		}
-		if (qName.equals("www")) {
+		case "www": {
 			bwww = true;
+			break;
 		}
-		if (qName.equals("title")) {
+		case "title": {
 			btitle = true;
+			break;
 		}
-		if (qName.equals("author")) {
+		case "author": {
 			bauthor = true;
+			break;
 		}
-		if (qName.equals("year")) {
+		case "year": {
 			byear = true;
+			break;
 		}
-		if (qName.equals("cite")) {
+		case "cite": {
 			bcite = true;
+			break;
 		}
-		if (qName.equals("volumn")) {
+		case "journal": {
+			bjournal = true;
+			break;
+		}
+		case "volumn": {
 			bvolumn = true;
+			break;
 		}
-		if (qName.equals("booktitle")) {
+		case "booktitle": {
 			bbooktitle = true;
+			break;
+		}
 		}
 	}
 	
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		if (qName.equals("paper") || qName.equals("incollection")) {
+		switch (qName) {
+		case "article":
+		case "inproceedings":
+		case "proceedings":
+		case "book":
+		case "incollection":
+		case "phdthesis":
+		case "mastersthesis":
+		case "www": {
 			long titleId = GraphDB.createPaper(title);
 			for (String author : authors) {
 				Long authorId = authorsId.get(author);
@@ -103,7 +125,7 @@ public class Parser extends DefaultHandler {
 				GraphDB.createRelationship(authorId, titleId);
 			}
 			if (barticle) {
-				GraphDB.createProperty("channel", titleId, "paper");
+				GraphDB.createProperty("channel", titleId, "article");
 				barticle = false;
 			}
 			if (binproceedings) {
@@ -154,6 +176,21 @@ public class Parser extends DefaultHandler {
 				GraphDB.createProperty("booktitle", titleId, booktitle);
 				booktitleExisted = false;
 			}
+			if (title.contains("Operating System")) {
+				GraphDB.createProperty("category", titleId, "Operating System");
+			}
+			else if (title.contains("Database")) {
+				GraphDB.createProperty("category", titleId, "Database");
+			}
+			else if (title.contains("Web")) {
+				GraphDB.createProperty("category", titleId, "Web");
+			}
+			else if (title.contains("Software")) {
+				GraphDB.createProperty("category", titleId, "Software");
+			}
+			else {
+				GraphDB.createProperty("category", titleId, "Other");
+			}
 			
 			authors.clear();
 			title = "";
@@ -162,29 +199,38 @@ public class Parser extends DefaultHandler {
 			journal = "";
 			volumn = "";
 			booktitle = "";
+			break;
 		}
-		if (qName.equals("author")) {
+		case "author": {
 			bauthor = false;
 			authors.add(author);
 			author = "";
+			break;
 		}
-		if (qName.equals("title")) {
+		case "title": {
 			btitle = false;
+			break;
 		}
-		if (qName.equals("year")) {
+		case "year": {
 			byear = false;
+			break;
 		}
-		if (qName.equals("cite")) {
+		case "cite": {
 			bcite = false;
+			break;
 		}
-		if (qName.equals("journal")) {
+		case "journal": {
 			bjournal = false;
+			break;
 		}
-		if (qName.equals("volumn")) {
+		case "volumn": {
 			bvolumn = false;
+			break;
 		}
-		if (qName.equals("booktitle")) {
+		case "booktitle": {
 			bbooktitle = false;
+			break;
+		}
 		}
     }
 	
